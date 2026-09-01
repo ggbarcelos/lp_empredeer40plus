@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Template de E-mail | Summit Empreender 40+</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --purple: #980BF4;
+      --blue: #0F64F7;
+      --cyan: #2BC8EA;
+      --dark: #06070d;
+      --dark-2: #0f1220;
+      --text: #f4f5fb;
+      --muted: #aeb4cb;
+      --line: rgba(255, 255, 255, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse 70% 60% at 10% 0%, rgba(152, 11, 244, 0.20), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 100%, rgba(43, 200, 234, 0.16), transparent 60%),
+        linear-gradient(165deg, var(--dark) 0%, var(--dark-2) 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .email-shell {
+      width: 100%;
+      max-width: 760px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(8, 10, 20, 0.92);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .email-header {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, rgba(152, 11, 244, 0.25), rgba(15, 100, 247, 0.2), rgba(43, 200, 234, 0.18));
+    }
+
+    .brand-logo {
+      display: block;
+      width: 100%;
+      max-width: 210px;
+      height: auto;
+      margin: 0 0 14px;
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.4));
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      margin: 8px 0 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .email-body {
+      padding: 34px 28px 30px;
+    }
+
+    .receiver {
+      margin: 0 0 14px;
+      font-size: 1.7rem;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .receiver span {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .message {
+      margin: 0;
+      color: #dde2f6;
+      line-height: 1.75;
+      font-size: 1rem;
+      white-space: pre-line;
+    }
+
+    .email-footer {
+      border-top: 1px solid var(--line);
+      padding: 20px 28px 26px;
+    }
+
+    .cta-link {
+      color: #dcdfff;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(220, 223, 255, 0.6);
+    }
+
+    .cta-link:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    @media (max-width: 640px) {
+      .email-header,
+      .email-body,
+      .email-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .receiver {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="email-shell">
+    <header class="email-header">
+      <img class="brand-logo" src="img/logo_empreender.png" alt="Logo Empreender 40+" />
+      <p class="brand-title">Summit Empreender 40+</p>
+      <p class="brand-subtitle">Convite especial para a 2ª edição</p>
+    </header>
+
+    <section class="email-body">
+      <h1 class="receiver">Olá, <span id="nome-destinatario">{{NOME_DESTINATARIO}}</span></h1>
+      <p class="message" id="mensagem-email">
+Tu esteve com a gente na primeira edição do Summit Empreender 40+.
+E por isso sabe: não foi só um evento. Foi um encontro de histórias, decisões e viradas.
+Agora, chegou a hora de dar o próximo passo.
+
+No dia 13 de maio, no Teatro do Bourbon Country, em Porto Alegre, acontece a segunda edição, ainda mais forte, mais profunda e mais conectada com quem entende que experiência não é passado. É ativo.
+Serão 22 palestrantes, conexões reais e um dia que pode marcar mais uma virada na tua trajetória.
+Entre eles, nomes como Dody Sirena e Nelson Sirotsky, dois gigantes que ajudam a inspirar o que estamos construindo.
+
+Se tu já viveu o primeiro, sabe o valor.
+Continue em movimento, esse lugar é teu.
+Nos encontramos lá.
+      </p>
+    </section>
+
+    <footer class="email-footer">
+      <a class="cta-link" href="https://www.empreender40mais.com" target="_blank" rel="noopener noreferrer">www.empreender40mais.com</a>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const defaultName = "{{NOME_DESTINATARIO}}";
+      const defaultMessage = document.getElementById("mensagem-email").textContent.trim();
+      const params = new URLSearchParams(window.location.search);
+
+      const nameFromUrl = params.get("nome");
+      const messageFromUrl = params.get("mensagem");
+
+      const finalName = nameFromUrl && nameFromUrl.trim() ? nameFromUrl.trim() : defaultName;
+      const finalMessage = messageFromUrl && messageFromUrl.trim()
+        ? messageFromUrl.replace(/\\n/g, "\n").trim()
+        : defaultMessage;
+
+      document.getElementById("nome-destinatario").textContent = finalName;
+      document.getElementById("mensagem-email").textContent = finalMessage;
+
+      window.setTemplateData = function setTemplateData(data) {
+        if (data && typeof data.nome === "string" && data.nome.trim()) {
+          document.getElementById("nome-destinatario").textContent = data.nome.trim();
+        }
+        if (data && typeof data.mensagem === "string" && data.mensagem.trim()) {
+          document.getElementById("mensagem-email").textContent = data.mensagem.replace(/\\n/g, "\n").trim();
+        }
+      };
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seja Bem-vindo ao Empreender 40+ | Oferta Exclusiva</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    /* ── BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:      #980BF4;
+      --purple-dark: #6B04B0;
+      --purple-glow: rgba(152,11,244,.35);
+      --gold:        #F5C518;
+      --gold-light:  #FFE082;
+      --dark:        #08050E;
+      --dark-2:      #110d1c;
+      --dark-3:      #1a1330;
+      --card-bg:     rgba(255,255,255,.04);
+      --card-border: rgba(255,255,255,.08);
+      --text:        #f0eaff;
+      --text-muted:  #9b8ec4;
+      --radius:      16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── GRADIENT TEXT ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #980BF4 0%, #c05af5 50%, #F5C518 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .accent { color: var(--purple); }
+
+    /* ═══════════════════════════════════════════
+       HERO — VIDEO SECTION
+    ═══════════════════════════════════════════ */
+    .hero-promo {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark);
+      overflow: hidden;
+      padding: 80px 0 60px;
+    }
+
+    /* Background ambient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 { width: 600px; height: 600px; background: rgba(152,11,244,.18); top: -200px; left: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(245,197,24,.08); bottom: -150px; right: -150px; }
+    .orb-3 { width: 300px; height: 300px; background: rgba(152,11,244,.12); top: 40%; left: 50%; transform: translate(-50%,-50%); }
+
+    /* Diagonal grid lines */
+    .hero-promo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(152,11,244,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(152,11,244,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    .hero-promo-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    /* Welcome badge */
+    .welcome-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(152,11,244,.15);
+      border: 1px solid rgba(152,11,244,.4);
+      color: #c98af8;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+
+    .welcome-badge .pulse-dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse-anim 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-anim {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: .5; }
+    }
+
+    /* Heading */
+    .hero-heading {
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 700px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    /* Video wrapper */
+    .video-shell {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto 20px;
+    }
+
+    .video-glow {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(ellipse at center, var(--purple-glow) 0%, transparent 70%);
+      border-radius: 28px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .video-frame {
+      position: relative;
+      z-index: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(152,11,244,.25);
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-frame iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+    }
+
+    .video-caption {
+      text-align: center;
+      font-size: .82rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      letter-spacing: .05em;
+    }
+
+    /* ═══════════════════════════════════════════
+       MANIFESTO SECTION
+    ═══════════════════════════════════════════ */
+    .manifesto-section {
+      background: var(--dark-2);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manifesto-section::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(152,11,244,.5), transparent);
+    }
+
+    .manifesto-full-text {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding: 0 16px;
+    }
+
+    .mft-lead {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
+      border-left: 4px solid var(--purple);
+      padding-left: 24px;
+    }
+
+    .mft-body {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: #c8b8e8;
+      line-height: 1.85;
+      padding-left: 28px;
+    }
+
+    .mft-highlight {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(152,11,244,.12), rgba(245,197,24,.06));
+      border: 1px solid rgba(152,11,244,.3);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin: 12px 0;
+    }
+
+    .mft-quote-icon {
+      font-size: 3rem;
+      color: var(--purple);
+      opacity: .5;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .mft-highlight span {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1.3;
+    }
+
+    .mft-closer {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.6;
+      padding-left: 28px;
+      text-align: center;
+      padding: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       CTA / OFFER SECTION
+    ═══════════════════════════════════════════ */
+    .cta-section {
+      background: var(--dark-3);
+      padding: 110px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(152,11,244,.15) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245,197,24,.06) 0%, transparent 70%);
+    }
+
+    .offer-card {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(145deg, rgba(26,19,48,.9) 0%, rgba(17,13,28,.95) 100%);
+      border: 1px solid rgba(152,11,244,.35);
+      border-radius: 28px;
+      padding: clamp(36px, 5vw, 72px);
+      box-shadow: 0 40px 100px rgba(0,0,0,.5), 0 0 0 1px rgba(152,11,244,.1);
+      overflow: hidden;
+    }
+
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--gold), var(--purple), transparent);
+    }
+
+    .offer-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,197,24,.1);
+      border: 1px solid rgba(245,197,24,.3);
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+
+    .offer-heading {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .offer-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 560px;
+    }
+
+    /* Discount badge */
+    .discount-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, #e0a800 100%);
+      color: #08050E;
+      font-weight: 900;
+      position: relative;
+      box-shadow: 0 0 0 6px rgba(245,197,24,.15), 0 0 0 12px rgba(245,197,24,.07);
+      animation: badge-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes badge-pulse {
+      0%, 100% { box-shadow: 0 0 0 6px rgba(245,197,24,.15), 0 0 0 12px rgba(245,197,24,.07); }
+      50% { box-shadow: 0 0 0 10px rgba(245,197,24,.2), 0 0 0 20px rgba(245,197,24,.06); }
+    }
+
+    .discount-badge .pct { font-size: 2.6rem; line-height: 1; }
+    .discount-badge .off { font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; }
+    .discount-badge .label { font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+
+    /* Coupon code box */
+    .coupon-box {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px dashed rgba(245,197,24,.5);
+      max-width: 360px;
+      margin-bottom: 36px;
+      background: rgba(245,197,24,.04);
+    }
+
+    .coupon-code {
+      flex: 1;
+      padding: 16px 22px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: .15em;
+      color: var(--gold);
+      font-family: 'Courier New', monospace;
+    }
+
+    .coupon-label {
+      padding: 0 18px;
+      font-size: .7rem;
+      font-weight: 700;
+      color: rgba(245,197,24,.6);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      border-left: 2px dashed rgba(245,197,24,.3);
+      white-space: nowrap;
+    }
+
+    /* Buy button */
+    .btn-buy-promo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s, filter .25s;
+      box-shadow: 0 16px 48px rgba(152,11,244,.45);
+      letter-spacing: .02em;
+    }
+
+    .btn-buy-promo:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 60px rgba(152,11,244,.6);
+      color: #fff;
+      filter: brightness(1.1);
+    }
+
+    .btn-buy-promo i { font-size: 1.2rem; }
+
+    /* Steps list */
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: .95rem;
+      color: var(--text-muted);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(152,11,244,.4);
+    }
+
+    .steps-list li strong { color: var(--text); }
+
+    /* ═══════════════════════════════════════════
+       SPONSORS / APOIADORES
+    ═══════════════════════════════════════════ */
+    .partners-section {
+      background: var(--dark-2);
+      padding: 90px 0;
+      position: relative;
+    }
+
+    .partners-section::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(152,11,244,.4), transparent);
+    }
+
+    .section-label-promo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(152,11,244,.12);
+      border: 1px solid rgba(152,11,244,.3);
+      color: #c98af8;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .section-title-promo {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-desc-promo {
+      color: var(--text-muted);
+      font-size: .95rem;
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    .partner-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+      height: 100%;
+    }
+
+    .partner-card:hover {
+      border-color: rgba(152,11,244,.4);
+      transform: translateY(-4px);
+    }
+
+    .partner-card img {
+      max-height: 72px;
+      max-width: 180px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .partner-tag {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(152,11,244,.1);
+      padding: 4px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(152,11,244,.2);
+    }
+
+    .partner-name {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .partner-desc {
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Apoiadores grid (smaller logos) */
+    .apoiadores-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .apoiador-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 14px 22px;
+      border-radius: 50px;
+      transition: border-color .3s;
+    }
+
+    .apoiador-chip:hover { border-color: rgba(152,11,244,.4); }
+
+    .apoiador-chip img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .apoiador-chip span {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Divider */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+      margin: 60px 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: #060410;
+      padding: 60px 0 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .footer-logo img { height: 44px; margin-bottom: 16px; }
+
+    .footer-desc {
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+
+    .footer-social a {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+
+    .footer-social a:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    .footer-heading {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: var(--purple); }
+
+    .footer-bottom {
+      margin-top: 50px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-dev {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-dev img { height: 22px; filter: brightness(0) invert(.6); }
+    .footer-dev a { display: flex; align-items: center; }
+
+    /* ═══════════════════════════════════════════
+       BACK TO TOP
+    ═══════════════════════════════════════════ */
+    #back-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--purple);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .3s, transform .3s;
+      z-index: 9999;
+      box-shadow: 0 8px 24px rgba(152,11,244,.45);
+    }
+
+    #back-top.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 767px) {
+      .offer-card { padding: 32px 24px; }
+      .coupon-box { max-width: 100%; }
+      .coupon-code { font-size: 1.1rem; }
+      .discount-badge { width: 110px; height: 110px; }
+      .discount-badge .pct { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HERO — BOAS-VINDAS + VÍDEO
+═══════════════════════════════════════════ -->
+<section class="hero-promo" id="inicio">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-promo-inner">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-down">
+
+        <div class="welcome-badge">
+          <span class="pulse-dot"></span>
+          Edição 2026 · Porto Alegre/RS
+        </div>
+
+        <div class="mb-4">
+          <img src="img/summit .png" alt="Summit Empreender 40+" style="max-width:420px;width:90%;filter:drop-shadow(0 0 40px rgba(152,11,244,.4));" />
+        </div>
+
+        <p class="hero-sub mx-auto">
+          O mundo em transformação pede pessoas em transformação.<br>
+          Acreditamos que homens e mulheres acima dos 40 anos são uma nova força de trabalho para um mercado que exige mais colaboração, maturidade e comprometimento.
+        </p>
+
+      </div>
+
+      <!-- Vídeo -->
+      <div class="video-shell" data-aos="zoom-in" data-aos-delay="100">
+        <div class="video-glow"></div>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/5wH5XOhWnA4?rel=0&modestbranding=1&color=white"
+            title="Empreender 40+ — Summit 2026"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="video-caption"><i class="bi bi-play-circle-fill me-1" style="color:var(--purple)"></i>Assista e descubra por que o Empreender 40+ vai mudar a sua trajetória</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     MANIFESTO
+═══════════════════════════════════════════ -->
+<section class="manifesto-section" id="manifesto">
+  <div class="container">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="section-label-promo mx-auto"><i class="bi bi-stars"></i> Nossa Missão</div>
+    </div>
+
+    <!-- Bloco de texto completo na íntegra -->
+    <div class="manifesto-full-text" data-aos="fade-up" data-aos-delay="80">
+
+      <p class="mft-lead">
+        O mundo em transformação pede pessoas em transformação.
+      </p>
+
+      <p class="mft-body">
+        Acreditamos que homens e mulheres acima dos 40 anos são uma nova força de trabalho para um mercado que exige mais colaboração, maturidade e comprometimento.
+      </p>
+
+      <p class="mft-body">
+        Nosso desejo é inspirar transformações pessoais, potencializar e impulsionar transformações coletivas. É a bagagem que vira vantagem, a experiência que vira oportunidade.
+      </p>
+
+      <p class="mft-body">
+        A tua história pode ter um novo começo. Junte-se ao Summit Empreender 40+. O maior evento de empreendedorismo para quem tem mais de 40 anos do Brasil.
+      </p>
+
+      <div class="mft-highlight" data-aos="fade-up" data-aos-delay="120">
+        <i class="bi bi-quote mft-quote-icon"></i>
+        <span>Acredite: A experiência é o seu maior ativo</span>
+      </div>
+
+      <p class="mft-closer">
+        O Empreender 40+ não é apenas um evento. <strong class="gradient-text">É um ponto de virada.</strong>
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CTA — OFERTA EXCLUSIVA
+═══════════════════════════════════════════ -->
+<section class="cta-section" id="oferta">
+  <div class="container position-relative" style="z-index:1;">
+
+    <div class="offer-card" data-aos="fade-up">
+      <div class="row gy-5 align-items-center">
+
+        <!-- Texto da oferta -->
+        <div class="col-lg-7">
+          <div class="offer-eyebrow"><i class="bi bi-tag-fill me-1"></i>Oferta Exclusiva · Acesso via QR Code</div>
+
+          <h2 class="offer-heading">
+            Garanta seu ingresso com<br>
+            <span class="gradient-text">50% de desconto!</span>
+          </h2>
+
+          <p class="offer-desc">
+            Você chegou aqui por um caminho especial. Por isso, temos uma oferta exclusiva para você. Clica no botão abaixo e usa o código na hora do pagamento para garantir o seu ingresso no Summit com metade do preço.
+          </p>
+
+          <div class="mb-2" style="font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px!important;">Seu código de desconto:</div>
+          <div class="coupon-box">
+            <span class="coupon-code">EMPREENDER 50</span>
+            <span class="coupon-label">50% OFF</span>
+          </div>
+
+          <ol class="steps-list">
+            <li>
+              <div class="step-num">1</div>
+              <span>Clique no botão <strong>"Quero meu ingresso agora"</strong> abaixo</span>
+            </li>
+            <li>
+              <div class="step-num">2</div>
+              <span>Escolha a categoria do seu ingresso na página de compras</span>
+            </li>
+            <li>
+              <div class="step-num">3</div>
+              <span>Insira o código <strong>EMPREENDER 50</strong> no campo de cupom e garanta 50% de desconto</span>
+            </li>
+          </ol>
+
+          <a href="https://uhuu.com/evento/rs/porto-alegre/summit-empreender-40-16127" target="_blank" rel="noopener" class="btn-buy-promo">
+            <i class="bi bi-ticket-perforated-fill"></i>
+            Quero meu ingresso agora — 50% OFF
+          </a>
+
+          <p style="font-size:.78rem;color:var(--text-muted);margin-top:14px;">
+            <i class="bi bi-shield-check me-1" style="color:var(--purple)"></i>
+            Vagas limitadas · Compra 100% segura · 13 de Maio de 2026 · Porto Alegre/RS
+          </p>
+        </div>
+
+        <!-- Badge visual -->
+        <div class="col-lg-5 d-flex flex-column align-items-center gap-4" data-aos="zoom-in" data-aos-delay="150">
+
+          <div class="discount-badge">
+            <span class="pct">50%</span>
+            <span class="off">de desconto</span>
+            <span class="label">Exclusivo</span>
+          </div>
+
+          <div style="text-align:center;padding:28px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);width:100%;max-width:300px;">
+            <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">O evento inclui</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;text-align:left;">
+              <li style="font-size:.88rem;color:var(--text);display:flex;align-items:center;gap:10px;">
+                <i class="bi bi-check-circle-fill" style="color:var(--purple);font-size:.9rem;flex-shrink:0;"></i>
+                Networking exclusivo 40+
+              </li>
+              <li style="font-size:.88rem;color:var(--text);display:flex;align-items:center;gap:10px;">
+                <i class="bi bi-check-circle-fill" style="color:var(--purple);font-size:.9rem;flex-shrink:0;"></i>
+                Conteúdo estratégico e prático
+              </li>
+              <li style="font-size:.88rem;color:var(--text);display:flex;align-items:center;gap:10px;">
+                <i class="bi bi-check-circle-fill" style="color:var(--purple);font-size:.9rem;flex-shrink:0;"></i>
+                Certificado de participação
+              </li>
+            </ul>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--text-muted);">
+            <i class="bi bi-calendar-event" style="color:var(--purple)"></i>
+            <span>13 de Maio de 2026 · Porto Alegre/RS</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     PATROCINADORES
+═══════════════════════════════════════════ -->
+<section class="partners-section" id="patrocinadores">
+  <div class="container">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="section-label-promo mx-auto"><i class="bi bi-building-check"></i> Patrocinadores</div>
+      <h2 class="section-title-promo">Parcerias que <span class="gradient-text">ampliam o impacto</span></h2>
+      <p class="section-desc-promo mx-auto">
+        O Empreender 40+ conecta experiência, inovação e desenvolvimento regional com o apoio de instituições que fortalecem o empreendedorismo gaúcho.
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center" data-aos="fade-up" data-aos-delay="80">
+
+      <div class="col-md-5 col-lg-4">
+        <div class="partner-card">
+          <div class="partner-tag">Patrocínio Institucional</div>
+          <img src="img/logo_rs.jpeg" alt="Governo do Rio Grande do Sul" style="border-radius:8px;" />
+          <div class="partner-name">Governo do Estado do Rio Grande do Sul</div>
+          <p class="partner-desc">Apoio institucional que fortalece a relevância do Summit e amplia seu alcance regional.</p>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-lg-4">
+        <div class="partner-card">
+          <div class="partner-tag">Parceiro Acadêmico</div>
+          <img src="img/logo_puc.png" alt="PUCRS" style="filter:brightness(0) invert(1);opacity:.85;" />
+          <div class="partner-name">PUCRS</div>
+          <p class="partner-desc">Conexão com excelência acadêmica, inovação e conhecimento aplicado ao empreendedorismo.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Realizadores -->
+    <div style="margin-top:60px;padding:36px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);" data-aos="fade-up" data-aos-delay="120">
+      <div class="text-center mb-4">
+        <div class="section-label-promo mx-auto"><i class="bi bi-award-fill"></i> Realização</div>
+        <p class="section-desc-promo mx-auto">O Summit é realizado por mentes inquietas e criativas que transformam ideias em movimento.</p>
+      </div>
+      <div class="row g-3 justify-content-center text-center">
+        <div class="col-sm-4">
+          <div style="padding:20px;border-radius:var(--radius);border:1px solid var(--card-border);background:rgba(255,255,255,.02);">
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple-dark),var(--purple));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><i class="bi bi-broadcast" style="font-size:1.2rem;"></i></div>
+            <div style="font-weight:700;font-size:.95rem;">Fabinho Vargas</div>
+            <div style="font-size:.78rem;color:var(--text-muted);">Fundador &amp; Palestrante</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div style="padding:20px;border-radius:var(--radius);border:1px solid var(--card-border);background:rgba(255,255,255,.02);">
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple-dark),var(--purple));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><i class="bi bi-play-circle-fill" style="font-size:1.2rem;"></i></div>
+            <div style="font-weight:700;font-size:.95rem;">Fernando Puhlmann</div>
+            <div style="font-size:.78rem;color:var(--text-muted);">Especialista em YouTube</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div style="padding:20px;border-radius:var(--radius);border:1px solid var(--card-border);background:rgba(255,255,255,.02);">
+            <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple-dark),var(--purple));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><i class="bi bi-palette-fill" style="font-size:1.2rem;"></i></div>
+            <div style="font-weight:700;font-size:.95rem;">Fábio Bernardi</div>
+            <div style="font-size:.78rem;color:var(--text-muted);">CEO &amp; CCO · House of Creativity</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logos abaixo dos cards -->
+      <div class="text-center mt-5 d-flex align-items-center justify-content-center gap-4">
+        <img src="img/logo_empreender.png" alt="Empreender 40+" style="height:50px;opacity:0.75;" />
+        <img src="img/logoV12.png" alt="V12" style="height:68px;opacity:0.75;filter:brightness(0) invert(1);" />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer id="contato">
+  <div class="container">
+    <div class="row gy-5">
+
+      <div class="col-lg-4">
+        <div class="footer-logo">
+          <img src="img/logo_empreender.png" alt="Empreender 40+" />
+        </div>
+        <p class="footer-desc">O Summit que conecta empreendedores experientes, transforma trajetórias e prova que a maturidade é o maior diferencial do mercado.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/empreender_40mais/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@CanalEmpreender40Mais" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4 class="footer-heading">Esta Página</h4>
+        <ul class="footer-links">
+          <li><a href="#manifesto">Nossa Missão</a></li>
+          <li><a href="#oferta">Oferta Exclusiva</a></li>
+          <li><a href="#patrocinadores">Patrocinadores</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h4 class="footer-heading">Contato</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.empreender40mais.com" target="_blank" rel="noopener">empreender40mais.com</a></li>
+          <li><a href="mailto:contato@empreender40mais.com">contato@empreender40mais.com</a></li>
+          <li><a href="https://www.instagram.com/empreender_40mais/" target="_blank" rel="noopener">@empreender_40mais</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h4 class="footer-heading">Ingresso com Desconto</h4>
+        <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px;">
+          Use o código <strong style="color:var(--gold);">EMPREENDER 50</strong> e garanta 50% OFF no seu ingresso!
+        </p>
+        <a href="https://uhuu.com/evento/rs/porto-alegre/summit-empreender-40-16127" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--purple),var(--purple-dark));color:#fff;font-size:.88rem;font-weight:700;padding:14px 22px;border-radius:50px;text-decoration:none;transition:filter .2s;">
+          <i class="bi bi-ticket-perforated-fill"></i>
+          Comprar com 50% OFF
+        </a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Summit Empreender 40+. Todos os direitos reservados.</span>
+      <span class="footer-dev">
+        Desenvolvido por
+        <a href="https://glauberbarcelos.com.br" target="_blank" rel="noopener">
+          <img src="img/logo_glauber_branca.png" alt="Glauber Barcelos" />
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<a href="#inicio" id="back-top" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
+
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+  // Back to top
+  const backTop = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('visible', window.scrollY > 400);
+  });
+</script>
+
+</body>
+</html>

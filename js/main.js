@@ -9,11 +9,82 @@ document.addEventListener('DOMContentLoaded', () => {
   const glow = document.querySelector('.cursor-glow');
   window.addEventListener('pointermove', (event) => { if (glow) { glow.style.setProperty('--x', `${event.clientX}px`); glow.style.setProperty('--y', `${event.clientY}px`); } }, { passive: true });
 
-  // O hero usa formas abstratas: as imagens legadas não fazem parte da composição.
-  document.querySelectorAll('.hero-stage .portrait img').forEach((image) => image.remove());
-
   const impactDescription = document.querySelector('.impact-reach > p');
   if (impactDescription) impactDescription.innerHTML = '<strong>+250 mil pessoas impactadas</strong> pela soma do Summit, canal no YouTube, redes sociais, site e confrarias.';
+
+  // Camadas editoriais deixam explícita a diferença entre o Summit (evento) e a Confraria (mesa).
+  const summitGallery = document.querySelector('.summit-gallery');
+  summitGallery?.setAttribute('role', 'group');
+  summitGallery?.setAttribute('aria-label', 'Experiência visual do Summit Empreender 40+ e galeria de palestrantes da edição 2026');
+  if (summitGallery && !summitGallery.querySelector('.summit-event-image')) {
+    const eventImage = document.createElement('figure');
+    eventImage.className = 'summit-event-image';
+    eventImage.innerHTML = '<img src="img/banner.jpg" alt="Arte oficial do Summit Empreender 40+, com programação, local e retratos dos participantes" loading="lazy"><figcaption><i class="bi bi-camera"></i> registro visual do evento</figcaption>';
+    summitGallery.prepend(eventImage);
+  }
+  const summitCopy = document.querySelector('.summit-copy');
+  if (summitCopy && !summitCopy.querySelector('.summit-facts')) {
+    const facts = document.createElement('div');
+    facts.className = 'summit-facts';
+    facts.innerHTML = '<span><i class="bi bi-calendar3"></i><b>13 maio</b><small>2026</small></span><span><i class="bi bi-clock"></i><b>9h30–18h30</b><small>um dia de conteúdo</small></span><span><i class="bi bi-geo-alt"></i><b>Teatro Bourbon Country</b><small>Porto Alegre · RS</small></span>';
+    summitCopy.insertBefore(facts, summitCopy.querySelector('.summit-points'));
+  }
+  const confrariaStage = document.querySelector('.confraria-stage');
+  if (confrariaStage && !confrariaStage.querySelector('.confraria-photo')) {
+    const photo = document.createElement('figure');
+    photo.className = 'confraria-photo';
+    photo.innerHTML = '<img src="img/confraria-mesa.png" alt="Encontro da Confraria Empreender 40+ em volta de uma mesa, em conversa entre pares" loading="lazy"><figcaption><i class="bi bi-cup-hot"></i> Confraria · encontros mensais</figcaption>';
+    confrariaStage.prepend(photo);
+  }
+  confrariaStage?.setAttribute('role', 'group');
+  confrariaStage?.setAttribute('aria-label', 'Imagem editorial da experiência de mesa da Confraria Empreender 40+');
+  const confrariaCopy = document.querySelector('.confraria-copy');
+  if (confrariaCopy && !confrariaCopy.querySelector('.confraria-separation-note')) {
+    const note = document.createElement('span');
+    note.className = 'confraria-separation-note';
+    note.setAttribute('aria-hidden', 'true');
+    note.textContent = 'EXPERIÊNCIA DE MESA · NÃO É O SUMMIT';
+    confrariaCopy.prepend(note);
+  }
+
+  // Entrada progressiva e navegação contextual; desliga-se automaticamente para quem prefere menos movimento.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealTargets = [...document.querySelectorAll('.section > .page-width, footer .footer-grid, footer .footer-bottom')];
+  revealTargets.forEach((target) => target.classList.add('reveal-on-scroll'));
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    revealTargets.forEach((target) => revealObserver.observe(target));
+  } else revealTargets.forEach((target) => target.classList.add('is-visible'));
+
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  progress.innerHTML = '<span></span>';
+  document.body.appendChild(progress);
+  const progressBar = progress.firstElementChild;
+  let progressRaf = 0;
+  const updateProgress = () => {
+    if (progressRaf) return;
+    progressRaf = window.requestAnimationFrame(() => {
+      progressRaf = 0;
+      const scrollable = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+      if (progressBar) progressBar.style.transform = `scaleX(${ratio})`;
+    });
+  };
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  const navSectionLinks = [...document.querySelectorAll('.nav-menu a[href^="#"]')].filter((link) => !link.classList.contains('nav-action'));
+  const navSections = navSectionLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window && navSections.length) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) navSectionLinks.forEach((link) => link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`)); });
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+    navSections.forEach((sectionNode) => navObserver.observe(sectionNode));
+  }
 
   // Mosaico vivo do Summit: alterna os retratos de forma discreta.
   const summitFrames = [...document.querySelectorAll('.summit-portraits img')];
@@ -42,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 260);
       speakerIndex += 1;
     };
-    window.setInterval(rotateSummit, 3400);
+    if (!reduceMotion) window.setInterval(rotateSummit, 3400);
   }
 
   const section = document.getElementById('youtube');

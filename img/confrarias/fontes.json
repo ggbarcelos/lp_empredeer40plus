@@ -1,0 +1,26 @@
+{
+  "pasta": "https://drive.google.com/drive/folders/1AJicVXNAFkzLX7a_IjwazKjlz813U3nX",
+  "tratamento": "Apresentação em CSS: brightness(1.04) contrast(1.04) saturate(.94). Arquivos apenas redimensionados e convertidos para WebP; ampliação exibe o enquadramento completo.",
+  "fotos": [
+    {
+      "arquivo": "grupo",
+      "original": "EMPREENDER 40+-108.jpg",
+      "drive_id": "1jI8hDcFQXXTny0y3kQBfFNnA3hIqr8vu"
+    },
+    {
+      "arquivo": "conversa",
+      "original": "EMPREENDER 40+-006.jpg",
+      "drive_id": "1ti3ZZ7GJIdc-LNdOqOpCB8KYU4Al4Qr6"
+    },
+    {
+      "arquivo": "encontro",
+      "original": "IMG_3134.JPG",
+      "drive_id": "1mCaJnPiFGf20xUgQ-NE-prEHd12qOH9h"
+    },
+    {
+      "arquivo": "conexoes",
+      "original": "EMPREENDER 40+-026.jpg",
+      "drive_id": "1OjvoSwK9YaiePStXQteJX9QJiV17j8uQ"
+    }
+  ]
+}

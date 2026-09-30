@@ -105,7 +105,46 @@
     sections.forEach((section) => section.classList.add('is-visible'));
   }
 
-  document.querySelectorAll('img').forEach((image) => {
+  const galleryPhotos = [...document.querySelectorAll('[data-gallery-photo]')];
+  const photoViewer = document.getElementById('confraria-viewer');
+  if (galleryPhotos.length && typeof photoViewer?.showModal === 'function') {
+    const viewerImage = photoViewer.querySelector('img');
+    const viewerCaption = document.getElementById('viewer-caption');
+    const viewerCount = document.getElementById('viewer-count');
+    let currentPhoto = 0;
+    let photoTrigger;
+    const showPhoto = (index) => {
+      currentPhoto = (index + galleryPhotos.length) % galleryPhotos.length;
+      const photo = galleryPhotos[currentPhoto];
+      viewerImage.src = photo.href;
+      viewerImage.alt = photo.querySelector('img').alt;
+      viewerCaption.textContent = photo.dataset.caption;
+      viewerCount.textContent = `${currentPhoto + 1} / ${galleryPhotos.length}`;
+    };
+    galleryPhotos.forEach((photo, index) => photo.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      photoTrigger = photo;
+      showPhoto(index);
+      photoViewer.showModal();
+      body.classList.add('is-photo-open');
+    }));
+    photoViewer.querySelector('.photo-viewer-close').addEventListener('click', () => photoViewer.close());
+    photoViewer.querySelectorAll('[data-photo-direction]').forEach((button) => button.addEventListener('click', () => showPhoto(currentPhoto + Number(button.dataset.photoDirection))));
+    photoViewer.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        showPhoto(currentPhoto + (event.key === 'ArrowRight' ? 1 : -1));
+      }
+    });
+    photoViewer.addEventListener('click', (event) => { if (event.target === photoViewer) photoViewer.close(); });
+    photoViewer.addEventListener('close', () => {
+      body.classList.remove('is-photo-open');
+      photoTrigger?.focus({ preventScroll: true });
+    });
+  }
+
+  document.querySelectorAll('img[src]').forEach((image) => {
     const createFallback = () => {
       const parent = image.parentElement;
       image.classList.add('is-missing');

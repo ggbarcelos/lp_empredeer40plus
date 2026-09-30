@@ -1,6 +1,12 @@
 {
   "pasta": "https://drive.google.com/drive/folders/1AJicVXNAFkzLX7a_IjwazKjlz813U3nX",
-  "tratamento": "Apresentação em CSS: brightness(1.04) contrast(1.04) saturate(.94). Arquivos apenas redimensionados e convertidos para WebP; ampliação exibe o enquadramento completo.",
+  "galeria_atual": {
+    "origem": "Arquivos locais fornecidos pelo usuário em img/confrarias",
+    "arquivos": ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"],
+    "conversao": "WebP com qualidade 94 e method 6; versões responsivas com 800 e 1600 pixels de largura, além de 2400 para img1. Arquivos img1.webp a img5.webp mantêm a resolução original.",
+    "apresentacao": "Proporções e cores originais, sem recortes ou filtros. Ampliação permite percorrer as cinco fotos."
+  },
+  "tratamento_anterior": "As fotos abaixo foram redimensionadas e convertidas para WebP na primeira seleção; estão preservadas como arquivos anteriores e não são usadas na galeria atual.",
   "fotos": [
     {
       "arquivo": "grupo",

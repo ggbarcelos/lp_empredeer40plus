@@ -214,20 +214,22 @@ a { color: inherit; }
 .confraria-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(310px, .55fr); gap: clamp(35px, 6vw, 90px); align-items: start; }
 .confraria-photo { margin: 0; border: 1px solid rgba(255, 255, 255, .18); background: #0b0b0e; }
 .confraria-photo-open { position: relative; display: block; overflow: hidden; background: #211c25; }
-.confraria-photo img { width: 100%; height: auto; filter: brightness(1.04) contrast(1.04) saturate(.94); transition: transform .5s; }
-.confraria-photo-open:hover img { transform: scale(1.025); }
+.confraria-photo img { width: 100%; height: auto; }
+.confraria-photo-open:hover .photo-expand { border-color: var(--blue); background: rgba(16, 16, 19, .9); }
 .confraria-photo-open:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
-.confraria-photo-featured img { aspect-ratio: 16 / 10; height: auto; object-fit: cover; object-position: center 68%; }
+.confraria-photo-featured img { aspect-ratio: 3 / 2; }
 .photo-expand { position: absolute; right: 16px; bottom: 16px; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 50%; color: #fff; background: rgba(16, 16, 19, .7); font-size: 1.3rem; }
 .confraria-photo figcaption { display: flex; justify-content: space-between; gap: 14px; padding: 17px 18px; color: #bfb9cb; font-size: .65rem; line-height: 1.5; letter-spacing: .06em; }
 .confraria-photo figcaption span:last-child { flex-shrink: 0; color: #8c8599; }
-.confraria-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 30px; }
-.confraria-gallery img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: center 42%; }
+.confraria-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 2fr)) minmax(0, 4.5fr); gap: 20px; margin-top: 30px; }
+.confraria-gallery img { aspect-ratio: 2 / 3; }
+.confraria-gallery .confraria-photo-wide img { aspect-ratio: 3 / 2; }
+.confraria-gallery figcaption { min-height: 76px; }
 .confraria-invite { margin-top: 30px; font-size: .65rem; }
 .photo-viewer { width: min(1120px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 54px 24px 20px; border: 1px solid #484151; border-radius: 12px; color: #eeeaf2; background: #141117; }
 .photo-viewer::backdrop { background: rgba(5, 4, 8, .9); backdrop-filter: blur(8px); }
 .photo-viewer figure { margin: 0; }
-.photo-viewer img { display: block; width: 100%; height: min(68dvh, 760px); object-fit: contain; filter: brightness(1.04) contrast(1.04) saturate(.94); }
+.photo-viewer img { display: block; width: 100%; height: min(68dvh, 760px); object-fit: contain; }
 .photo-viewer figcaption { padding-top: 18px; text-align: center; font-size: .85rem; }
 .photo-viewer button { display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid #62576f; border-radius: 50%; color: #fff; background: #282130; font: inherit; font-size: 1.2rem; cursor: pointer; }
 .photo-viewer button:hover { background: #483258; }
@@ -395,6 +397,8 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .summit-totals > p { max-width: none; }
   .caravan-aside { padding-left: 24px; }
   .confraria-layout { gap: 40px; }
+  .confraria-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .confraria-photo-wide { grid-column: 1 / -1; }
   .confraria-copy { max-width: 650px; }
   .youtube-live { grid-template-columns: 1fr; }
   .editorial-title h2 { font-size: clamp(4.6rem, 11vw, 8rem); }
@@ -467,7 +471,7 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .caravan-aside { padding-left: 20px; }
   .confraria-number strong { font-size: 5rem; }
   .confraria-gallery { grid-template-columns: 1fr; gap: 24px; }
-  .confraria-photo-featured img { aspect-ratio: 4 / 3; }
+  .confraria-gallery figcaption { min-height: 0; }
   .photo-viewer { padding-inline: 12px; }
   .channel-counts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .channel-counts div { align-items: start; flex-direction: column; gap: 5px; }

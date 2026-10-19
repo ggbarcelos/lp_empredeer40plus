@@ -170,36 +170,28 @@
   const youtubeStatus = document.getElementById('yt-player-status');
   const youtubeList = document.getElementById('yt-videos-list');
   if (youtubeSection && youtubePlayer && youtubeTitle && youtubeDate && youtubeList) {
-    const channelId = youtubeSection.dataset.youtubeChannelId;
-    const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(channelId || '')}`;
+    const playlistId = 'PLHqcbZC2lqMC1HIn_49bY6Q2CQZqPrk8a';
     const localFileMode = window.location.protocol === 'file:';
-    // Verified on the official channel on 19/10/2026; used when public feed proxies fail.
-    const fallbackVideos = [
-      { id: 'Od3pYx7MFqM', title: 'Rafa Bandeira | Estratégias Digitais, Bastidores da Política e Bagagem de Vida', date: '' },
-      { id: '5g5hO9kjvks', title: 'Eduardo Siga | Empreendedorismo a partir de Relações Pessoais', date: '' },
-      { id: '7zWtPiArPCM', title: 'Potter | Empreender Como Desafio', date: '' }
-    ];
     const validVideoId = (value) => /^[A-Za-z0-9_-]{11}$/.test(value || '');
-    const extractVideoId = (value) => {
-      const match = String(value || '').match(/(?:[?&]v=|youtu\.be\/|youtube\.com\/embed\/|yt:video:)([A-Za-z0-9_-]{11})(?:[^A-Za-z0-9_-]|$)/);
-      return match?.[1] || '';
-    };
     const formattedDate = (value) => {
       const parsedDate = new Date(value);
-      if (Number.isNaN(parsedDate.getTime())) return 'No canal Empreender 40+';
+      if (Number.isNaN(parsedDate.getTime())) return 'Podcast Empreender 40+';
       return new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).format(parsedDate);
     };
-    const normaliseVideos = (items) => items.map((item) => {
-      const rawId = [item.id, item.link, item.guid, item.url]
-        .map((value) => (validVideoId(value) ? value : extractVideoId(value)))
-        .find(Boolean) || '';
-      const id = validVideoId(rawId) ? rawId : '';
-      return {
-        id,
-        title: String(item.title || 'Novo vídeo').trim().slice(0, 160),
-        date: item.date || item.pubDate || item.published || ''
-      };
-    }).filter((video) => video.id);
+    const normaliseVideos = (catalog) => {
+      if (catalog.playlistId !== playlistId || !Array.isArray(catalog.videos)) throw new Error('Catálogo inválido');
+      const ids = new Set();
+      const videos = catalog.videos.map((item) => {
+        const id = String(item.id || '');
+        const title = String(item.title || '').trim().slice(0, 180);
+        const published = String(item.published || '');
+        if (!validVideoId(id) || !title || !Number.isFinite(Date.parse(published)) || ids.has(id)) throw new Error('Episódio inválido');
+        ids.add(id);
+        return { id, title, published };
+      });
+      if (!videos.length) throw new Error('Playlist vazia');
+      return videos.sort((a, b) => Date.parse(b.published) - Date.parse(a.published));
+    };
 
     let localPreview;
     const setLocalPreview = (video) => {
@@ -218,7 +210,7 @@
       if (localFileMode) setLocalPreview(video);
       else youtubePlayer.src = `https://www.youtube-nocookie.com/embed/${video.id}?rel=0${autoplay ? '&autoplay=1' : ''}`;
       youtubeTitle.textContent = video.title;
-      youtubeDate.textContent = video.date ? `Publicado em ${formattedDate(video.date)}` : 'Vídeo do canal Empreender 40+';
+      youtubeDate.textContent = `Publicado em ${formattedDate(video.published)}`;
       youtubeList.querySelectorAll('.recent-video-button').forEach((button) => {
         const selected = button.dataset.id === video.id;
         button.classList.toggle('active', selected);
@@ -227,9 +219,8 @@
       if (youtubeStatus) youtubeStatus.textContent = `Selecionado: ${video.title}.`;
     };
     const renderVideos = (videos) => {
-      const availableVideos = videos.slice(0, 8);
       youtubeList.replaceChildren();
-      availableVideos.forEach((video, index) => {
+      videos.forEach((video, index) => {
         const item = document.createElement('li');
         item.className = 'recent-video-item';
         const button = document.createElement('button');
@@ -247,7 +238,7 @@
         const titleText = document.createElement('strong');
         titleText.textContent = video.title;
         const dateText = document.createElement('small');
-        dateText.textContent = formattedDate(video.date);
+        dateText.textContent = formattedDate(video.published);
         meta.append(titleText, dateText);
         const play = document.createElement('i');
         play.className = 'bi bi-play-fill';
@@ -257,56 +248,24 @@
         item.append(button);
         youtubeList.append(item);
       });
-      if (availableVideos.length) selectVideo(availableVideos[0]);
-    };
-    const parseFeed = (xml) => {
-      const documentNode = new DOMParser().parseFromString(xml, 'application/xml');
-      if (documentNode.querySelector('parsererror')) throw new Error('Feed inválido');
-      const entries = [...documentNode.querySelectorAll('entry')].map((entry) => {
-        const links = [...entry.querySelectorAll('link')];
-        const link = links.find((candidate) => candidate.getAttribute('rel') !== 'self')?.getAttribute('href') || '';
-        const videoNode = entry.getElementsByTagNameNS('http://www.youtube.com/xml/schemas/2015', 'videoId')[0];
-        const id = videoNode?.textContent?.trim() || extractVideoId(link);
-        return {
-          id,
-          link,
-          title: entry.querySelector('title')?.textContent?.trim() || 'Novo vídeo',
-          published: entry.querySelector('published')?.textContent || ''
-        };
-      });
-      return normaliseVideos(entries);
-    };
-    const fromRss2Json = async () => {
-      const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`);
-      if (!response.ok) throw new Error('RSS indisponível');
-      const data = await response.json();
-      const videos = normaliseVideos(data.items || []);
-      if (!videos.length) throw new Error('RSS vazio');
-      return videos;
-    };
-    const fromAllOrigins = async () => {
-      const response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`);
-      if (!response.ok) throw new Error('Proxy indisponível');
-      const videos = parseFeed(await response.text());
-      if (!videos.length) throw new Error('Feed vazio');
-      return videos;
+      selectVideo(videos[0]);
     };
 
-    renderVideos(fallbackVideos);
-    if (!localFileMode) {
-      (async () => {
-        try {
-          renderVideos(await fromRss2Json());
-        } catch {
-          try {
-            renderVideos(await fromAllOrigins());
-          } catch {
-            renderVideos(fallbackVideos);
-            if (youtubeStatus) youtubeStatus.textContent = 'A lista recente não pôde ser atualizada. Uma seleção de episódios do canal está disponível.';
-          }
-        }
-      })();
-    }
+    (async () => {
+      try {
+        const response = await fetch('data/youtube-playlist.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Catálogo indisponível');
+        renderVideos(normaliseVideos(await response.json()));
+      } catch {
+        youtubeList.replaceChildren();
+        const message = document.createElement('li');
+        message.className = 'recent-placeholder';
+        message.textContent = 'Não foi possível carregar os episódios aqui. Abra a playlist no YouTube.';
+        youtubeList.append(message);
+        youtubeDate.textContent = 'A playlist completa está disponível no YouTube.';
+        if (youtubeStatus) youtubeStatus.textContent = 'A playlist não pôde ser carregada neste momento.';
+      }
+    })();
   }
 
   document.addEventListener('keydown', (event) => {

@@ -164,6 +164,21 @@ a { color: inherit; }
 .summit-heading, .channel-heading { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: clamp(40px, 8vw, 120px); align-items: end; margin-bottom: 70px; }
 .summit-heading .overline, .channel-heading .overline { margin: 0 0 18px; }
 .summit-heading > p, .channel-heading > p { max-width: 410px; margin: 0 0 8px auto; color: var(--muted); font-size: clamp(1rem, 1.35vw, 1.2rem); }
+.upcoming-events { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: clamp(80px, 9vw, 125px); }
+.event-card { display: flex; flex-direction: column; align-items: start; min-height: 360px; padding: clamp(27px, 3vw, 42px); border: 1px solid rgba(123, 129, 231, .38); background: linear-gradient(145deg, rgba(34, 31, 67, .94), rgba(15, 20, 36, .96)); }
+.event-card:first-child { border-top: 3px solid var(--blue); }
+.event-card:last-child { border-top: 3px solid var(--purple); }
+.event-card-status { color: #86ddf8; font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.event-card > div { margin-block: auto; padding-block: 30px; }
+.event-card-date { margin: 0 0 14px; color: #bcb8cd; font-size: .78rem; }
+.event-card h3 { max-width: 530px; margin: 0; font-size: clamp(1.9rem, 2.8vw, 3.2rem); line-height: 1.06; letter-spacing: -.055em; }
+.event-card div > p:last-child { max-width: 490px; margin: 16px 0 0; color: #c4c0d0; font-size: .9rem; }
+.event-card > a { display: inline-flex; gap: 18px; align-items: center; min-height: 40px; color: #8cdeff; font-size: .74rem; font-weight: 700; text-decoration: none; }
+.event-card > a:hover { color: #fff; }
+.past-event-heading { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 12px 56px; align-items: end; margin-bottom: 28px; padding-top: 28px; border-top: 1px solid var(--line); }
+.past-event-heading .micro-label { grid-column: 1 / -1; }
+.past-event-heading h3 { margin: 0; font-size: clamp(2rem, 3.3vw, 4rem); line-height: 1.08; letter-spacing: -.055em; }
+.past-event-heading p { max-width: 500px; margin: 0 0 4px auto; color: var(--muted); font-size: .93rem; }
 .summit-showcase { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(320px, .7fr); gap: 1px; background: rgba(255, 255, 255, .2); border: 1px solid rgba(255, 255, 255, .2); }
 .summit-poster { margin: 0; background: #12121a; }
 .summit-poster img { display: block; width: 100%; height: auto; }
@@ -254,10 +269,11 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
 /* A real player and simple list replace decorative video thumbnails. */
 .channel { background: radial-gradient(circle at 80% 25%, rgba(79, 43, 154, .3), transparent 36%), radial-gradient(circle at 4% 88%, rgba(31, 94, 179, .14), transparent 30%), #101013; }
 .channel::before { position: absolute; z-index: -1; top: 21%; left: -5%; width: 34vw; aspect-ratio: 1; border: 1px solid rgba(56, 147, 220, .16); border-radius: 50%; box-shadow: 0 0 0 75px rgba(50, 107, 216, .025); content: ""; pointer-events: none; }
-.channel-counts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: center; gap: 22px; margin-bottom: 28px; padding: 22px 0; border-block: 1px solid var(--line); }
-.channel-counts div { display: flex; align-items: baseline; gap: 15px; }
-.channel-counts strong { font: 700 clamp(2rem, 3.5vw, 4rem)/1 Montserrat, sans-serif; letter-spacing: -.07em; }
-.channel-counts div span { max-width: 95px; color: #b8b4c3; font-size: .72rem; line-height: 1.35; }
+.channel-counts { display: grid; grid-template-columns: repeat(2, auto) minmax(110px, 1fr) auto; align-items: center; gap: clamp(18px, 3vw, 48px); margin-bottom: 28px; padding: 22px 0; border-block: 1px solid var(--line); }
+.channel-counts div { display: flex; flex-direction: column; gap: 4px; }
+.channel-counts strong { font-size: clamp(1.45rem, 2.8vw, 2.6rem); line-height: 1; letter-spacing: -.06em; }
+.channel-counts div span { color: #b8b4c3; font-size: .72rem; }
+.channel-counts p { max-width: 160px; margin: 0; color: #9d99aa; font-size: .7rem; line-height: 1.4; }
 .channel-counts a { justify-self: end; color: #8be1ff; font-size: .72rem; font-weight: 700; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
 .channel-counts a span { margin-left: 12px; font-size: 1.2rem; }
 .youtube-live { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr); gap: 1px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .2); }
@@ -287,11 +303,10 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
 .recent-video-button > i { color: var(--blue); font-size: 1rem; }
 .video-highlights { margin-top: 70px; }
 .highlight-list { display: grid; margin-top: 18px; border-top: 1px solid var(--line); }
-.highlight-list a { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto 22px; align-items: center; gap: 20px; padding: 21px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s, padding .2s; }
+.highlight-list a { display: grid; grid-template-columns: 38px minmax(0, 1fr) 22px; align-items: center; gap: 20px; padding: 21px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s, padding .2s; }
 .highlight-list a:hover { padding-inline: 12px; background: rgba(255, 255, 255, .04); }
 .highlight-list span { color: #74dafa; font-size: .7rem; }
 .highlight-list strong { font: 600 clamp(1rem, 1.8vw, 1.7rem)/1.2 Montserrat, sans-serif; letter-spacing: -.03em; }
-.highlight-list b { color: #aaa5b7; font-size: .73rem; font-weight: 600; }
 .highlight-list i { color: var(--blue); font-style: normal; font-size: 1.35rem; }
 
 /* A luminous editorial chapter extends the deck's dark visual language. */
@@ -337,8 +352,12 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
 .founder-avatar--fernando img { height: 150%; }
 .founder-avatar--fabinho img { height: 170%; }
 .founder h4 { margin: 0; font-size: clamp(1.05rem, 1.6vw, 1.45rem); font-weight: 600; line-height: 1.3; letter-spacing: -.035em; }
+.founder p { max-width: 390px; margin: 7px 0 0; color: #bcb8cb; font-size: .77rem; line-height: 1.5; }
 .contact-invite { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: clamp(50px, 6vw, 84px); padding: 30px 140px 0 0; border-top: 1px solid var(--line); }
 .contact-invite p { margin: 10px 0 0; font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 500; line-height: 1.25; letter-spacing: -.045em; }
+.contact-direct { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 24px; }
+.contact-direct a { color: #9ce5ff; font-size: .78rem; font-weight: 700; overflow-wrap: anywhere; text-decoration: none; }
+.contact-direct a:hover { color: #fff; }
 .contact-invite .button { flex-shrink: 0; }
 .site-footer { padding: 60px 0 25px; background: #0b0b0d; }
 .footer-main { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: clamp(35px, 5vw, 80px); }
@@ -392,6 +411,9 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .ecosystem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ecosystem-item { grid-column: auto !important; }
   .summit-showcase { grid-template-columns: 1fr; }
+  .past-event-heading { grid-template-columns: 1fr; }
+  .past-event-heading .micro-label { grid-column: auto; }
+  .past-event-heading p { margin-left: 0; }
   .summit-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 10px 25px; }
   .summit-totals > .micro-label, .summit-totals > p { grid-column: 1 / -1; }
   .summit-totals > p { max-width: none; }
@@ -409,7 +431,7 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .contact-invite { padding-right: 0; }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1280px) {
   :root { --nav-height: 68px; }
   .site-nav { width: calc(100% - 36px); }
   .nav-toggle { display: block; }
@@ -456,6 +478,8 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .ecosystem .section-heading h2 { font-size: clamp(2.5rem, 11vw, 4rem); }
   .ecosystem-item { min-height: 190px; }
   .ecosystem-item h3 { font-size: 3rem; }
+  .upcoming-events { grid-template-columns: 1fr; }
+  .event-card { min-height: 300px; }
   .summit-totals { padding: 26px; }
   .summit-totals strong { font-size: clamp(3.1rem, 13vw, 5rem); }
   .edition-line { gap: 12px 20px; }
@@ -474,13 +498,11 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .confraria-gallery figcaption { min-height: 0; }
   .photo-viewer { padding-inline: 12px; }
   .channel-counts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .channel-counts div { align-items: start; flex-direction: column; gap: 5px; }
+  .channel-counts p { grid-column: 1 / -1; max-width: none; }
   .channel-counts a { grid-column: 1 / -1; justify-self: start; }
   .recent-video-list { padding-inline: 16px; }
   .recent-heading { padding-inline: 18px; }
   .highlight-list a { grid-template-columns: 25px 1fr 20px; gap: 11px; }
-  .highlight-list a b { grid-column: 2; font-size: .67rem; }
-  .highlight-list a i { grid-column: 3; grid-row: 1 / 3; }
   .editorial-layout { gap: 48px; }
   .editorial-title h2 { font-size: clamp(2.8rem, 10vw, 6.5rem); }
   .editorial-story { padding: 31px; box-shadow: 12px 12px 0 rgba(82, 66, 190, .12); }

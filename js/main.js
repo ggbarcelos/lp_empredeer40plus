@@ -9,7 +9,7 @@
   const liveRegion = document.getElementById('section-live');
   const sections = [...document.querySelectorAll('.deck-section')];
   const navLinks = [...document.querySelectorAll('.nav-menu a[href^="#"]')];
-  const mobileQuery = window.matchMedia('(max-width: 940px)');
+  const mobileQuery = window.matchMedia('(max-width: 1280px)');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let menuOpen = false;
 
@@ -173,8 +173,12 @@
     const channelId = youtubeSection.dataset.youtubeChannelId;
     const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(channelId || '')}`;
     const localFileMode = window.location.protocol === 'file:';
-    // This is the one fallback ID already used by the previous player implementation.
-    const fallbackVideos = [{ id: 'aNRU2Rb745s', title: 'Empreender 40+ | Histórias que movem gerações', date: '' }];
+    // Verified on the official channel on 19/10/2026; used when public feed proxies fail.
+    const fallbackVideos = [
+      { id: 'Od3pYx7MFqM', title: 'Rafa Bandeira | Estratégias Digitais, Bastidores da Política e Bagagem de Vida', date: '' },
+      { id: '5g5hO9kjvks', title: 'Eduardo Siga | Empreendedorismo a partir de Relações Pessoais', date: '' },
+      { id: '7zWtPiArPCM', title: 'Potter | Empreender Como Desafio', date: '' }
+    ];
     const validVideoId = (value) => /^[A-Za-z0-9_-]{11}$/.test(value || '');
     const extractVideoId = (value) => {
       const match = String(value || '').match(/(?:[?&]v=|youtu\.be\/|youtube\.com\/embed\/|yt:video:)([A-Za-z0-9_-]{11})(?:[^A-Za-z0-9_-]|$)/);
@@ -298,7 +302,7 @@
             renderVideos(await fromAllOrigins());
           } catch {
             renderVideos(fallbackVideos);
-            if (youtubeStatus) youtubeStatus.textContent = 'A lista recente não pôde ser atualizada. Um vídeo do canal está disponível.';
+            if (youtubeStatus) youtubeStatus.textContent = 'A lista recente não pôde ser atualizada. Uma seleção de episódios do canal está disponível.';
           }
         }
       })();

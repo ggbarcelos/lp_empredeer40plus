@@ -290,8 +290,8 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
 .local-video-preview i { color: var(--blue); font-size: 2.2rem; }
 .recent-panel { display: flex; flex-direction: column; }
 .recent-heading { display: flex; justify-content: space-between; align-items: center; padding: 24px 25px 15px; }
-.recent-heading > span:last-child { color: var(--blue); font-size: 1.6rem; }
-.recent-video-list { margin: 0; padding: 0 22px 22px; list-style: none; }
+.recent-order { color: #aaa7b6; font-size: .68rem; text-align: right; }
+.recent-video-list { max-height: min(70vh, 660px); margin: 0; padding: 0 22px 22px; overflow-y: auto; overscroll-behavior: contain; scrollbar-color: #6d67a8 #17151e; list-style: none; }
 .recent-video-item { border-top: 1px solid var(--line); }
 .recent-placeholder { padding: 23px 0; color: #a5a1b1; font-size: .82rem; }
 .recent-video-button { display: grid; grid-template-columns: 34px minmax(0, 1fr) 24px; align-items: center; gap: 11px; width: 100%; min-height: 75px; padding: 12px 0; border: 0; background: transparent; color: #e8e6ee; text-align: left; cursor: pointer; transition: color .2s, background .2s; }
@@ -301,13 +301,9 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
 .recent-video-meta strong { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font: 600 .83rem/1.35 Montserrat, sans-serif; }
 .recent-video-meta small { display: block; margin-top: 5px; color: #9592a3; font-size: .66rem; }
 .recent-video-button > i { color: var(--blue); font-size: 1rem; }
-.video-highlights { margin-top: 70px; }
-.highlight-list { display: grid; margin-top: 18px; border-top: 1px solid var(--line); }
-.highlight-list a { display: grid; grid-template-columns: 38px minmax(0, 1fr) 22px; align-items: center; gap: 20px; padding: 21px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s, padding .2s; }
-.highlight-list a:hover { padding-inline: 12px; background: rgba(255, 255, 255, .04); }
-.highlight-list span { color: #74dafa; font-size: .7rem; }
-.highlight-list strong { font: 600 clamp(1rem, 1.8vw, 1.7rem)/1.2 Montserrat, sans-serif; letter-spacing: -.03em; }
-.highlight-list i { color: var(--blue); font-style: normal; font-size: 1.35rem; }
+.playlist-link { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 58px; padding: 15px 23px; border-top: 1px solid var(--line); color: #9be5ff; font-size: .75rem; font-weight: 700; text-decoration: none; }
+.playlist-link:hover { color: #fff; background: rgba(48, 158, 226, .08); }
+.playlist-link span { font-size: 1.25rem; }
 
 /* A luminous editorial chapter extends the deck's dark visual language. */
 .editorial { color: #fff; background: radial-gradient(circle at 86% 18%, rgba(152, 47, 181, .26), transparent 28%), radial-gradient(circle at 5% 98%, rgba(47, 80, 216, .28), transparent 33%), #14101d; }
@@ -522,7 +518,6 @@ body.is-menu-open .whatsapp-float, body.is-photo-open .whatsapp-float { visibili
   .channel-counts a { grid-column: 1 / -1; justify-self: start; }
   .recent-video-list { padding-inline: 16px; }
   .recent-heading { padding-inline: 18px; }
-  .highlight-list a { grid-template-columns: 25px 1fr 20px; gap: 11px; }
   .editorial-layout { gap: 48px; }
   .editorial-title h2 { font-size: clamp(2.8rem, 10vw, 6.5rem); }
   .editorial-story { padding: 31px; box-shadow: 12px 12px 0 rgba(82, 66, 190, .12); }

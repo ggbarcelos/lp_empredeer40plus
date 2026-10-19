@@ -42,12 +42,10 @@ h1 span { display: block; color: transparent; background: linear-gradient(100deg
 .next-inner { display: flex; align-items: end; justify-content: space-between; gap: 55px; padding-block: clamp(75px, 8vw, 125px); }
 .next-inner h2 { max-width: 730px; margin: 22px 0 23px; font-size: clamp(2.8rem, 5.1vw, 5.8rem); line-height: 1.01; letter-spacing: -.07em; }
 .next-inner p:last-child { max-width: 610px; margin: 0; color: #c9c5d6; font-size: 1rem; line-height: 1.65; }
-.next-actions { display: grid; gap: 22px; justify-items: start; min-width: 275px; padding-bottom: 3px; }
+.next-actions { min-width: 275px; padding-bottom: 3px; }
 .primary-action { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; min-width: 275px; min-height: 56px; padding: 15px 20px; background: linear-gradient(110deg, var(--royal), #8b35dc); font-size: .77rem; font-weight: 800; text-decoration: none; }
 .primary-action:hover { background: linear-gradient(110deg, #1e6ef1, #ae36ea); }
 .primary-action span { font-size: 1.2rem; }
-.secondary-action { color: #a6eaff; font-size: .8rem; font-weight: 700; line-height: 1.4; text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.secondary-action:hover { color: #fff; }
 .page-footer { display: flex; justify-content: space-between; gap: 24px; padding-block: 32px; color: #a8a3b3; font-size: .75rem; }
 .page-footer a { text-decoration: none; }
 @media (max-width: 900px) { .intro { grid-template-columns: 1fr; min-height: 0; padding-top: 85px; } .intro-visual { min-height: 380px; max-height: 520px; } .project { grid-template-columns: 1fr; gap: 35px; } .next-inner { align-items: start; flex-direction: column; } }
